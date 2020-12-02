@@ -12,13 +12,13 @@ def menu_lineas():
               "1. DDA\n"
               "2. Bressenham\n"
               "0. Regresar\n")
-        opc= int(input("Opción: "))
+        opc = int(input("Opción: "))
 
         if opc == 1:
-            print("\n--DDA--")
+            print("\t--DDA--")
             dda()
         elif opc == 2:
-            print("\n--Bressenham--")
+            print("\t--Bressenham--")
             bress()
         elif opc == 0:
             break

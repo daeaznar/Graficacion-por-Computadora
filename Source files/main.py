@@ -15,17 +15,17 @@ def menu():
         opc = int(input("Opción: "))
 
         if opc == 1:
-            print("\n---Lineas---")
+            print("\t---Lineas---")
             lineas.menu_lineas()
         elif opc == 2:
-            print("\n---Circunferencias---")
+            print("\t---Circunferencias---")
             circunf.menu_circunf()
         elif opc == 3:
-            print("\n---Elipses---")
+            print("\t---Elipses---")
         elif opc == 4:
-            print("\n---Parábolas---")
+            print("\t---Parábolas---")
         elif opc == 5:
-            print("\n---Polígonos---")
+            print("\t---Polígonos---")
         elif opc == 0:
             print("Cerrando Sistema... Hasta luego")
             break
