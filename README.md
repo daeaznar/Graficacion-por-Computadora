@@ -1,6 +1,6 @@
 # Graficacion-por-Computadora
 Proyecto para la clase de graficación por computadora. <br>
-Programa que traza gráficamente, mediante los algoritmos seleccionados:
+Programa que, mediante los algoritmos seleccionados, traza gráficamente:
 <li>Lineas
 <li>Circunferencias/Círculos
 <li>Elipses
