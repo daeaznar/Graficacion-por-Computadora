@@ -6,5 +6,5 @@ Programa que traza gráficamente, mediante los algoritmos seleccionados:
 <li>Elipses
 <li>Parábolas
 <li>Polígonos
-<br>
+<br><br>
 Se usa OpenGL para la graficación de los algoritmos
