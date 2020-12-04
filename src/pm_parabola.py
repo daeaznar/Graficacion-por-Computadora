@@ -5,57 +5,44 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
 
-def circ_dda(xc, yc, r):
+def elipse_pm(xi, yi):
     #  Cálculo de constantes
 
-    r2 = r ** 2
     global x
     x = []
     global y
     y = []
-
-    x0 = [0]
-    y0 = [r]
+    pk = [1]
     i = 0
-    while y0[i] >= x0[i]:    # 1° Octante en (x0,y0)
-        y_temp = (r2 - x0[i] ** 2) ** 0.5
-        x0.append(i + 1)
-        y0.append(round(y_temp))
-        i += 1
-    x0.pop()
-    y0.pop(0)
-
-    #   ***ESPEJEO***
-    for i in range(len(x0)):    # 2° Octante para Completar 1° Cuadrante
-        x0.append(y0[i])
-        y0.append(x0[i])
-        i += 1
-
-    for i in range(len(x0)): # 2° Octante sumando (xc,yc)
-        x.append(x0[i]+xc)
-        y.append(y0[i]+yc)
+    x0=[0]
+    y0=[0]
+    while x0[i] < 100:
+        if pk[i] > 0:
+            x0.append(x0[i] + 1)
+            y0.append(y0[i] + 1)
+            pk.append(pk[i] - 2 * y0[i + 1] + 1)
+        else:
+            x0.append(x0[i] + 1)
+            y0.append(y0[i])
+            pk.append(pk[i] + 1)
         i += 1
 
-    espejoY=[]
-    for i in range(len(x)): # 2° Cuadrante en Y hacia arriba
-        x.append(x[i])
-        espejoY.append(y[i]-2*(r-((yc+r)-y[i])))
-        y.append(espejoY[i])
+    i = len(x0)-1
+    yrev = y0[::-1] # Copy y0 in reverse order to yrev
+    for j in range(len(x0)):
+        x0.append(x0[i] + 1)
+        y0.append(yrev[j])
+        i += 1
+        j += 1
 
-    espejoX=[]
-    for i in range(len(x0)):  # 3° Cuadrante en X hacia izquierda
-        y.append(y[i])
-        espejoX.append(x[i]-2*(r-((xc+r)-x[i])))
-        x.append(espejoX[i])
-
-    for i in range(len(x0)):  # 4° Cuadrante, esquina opuesta
-        x.append(espejoX[i])
-        y.append(espejoY[i])
+    for i in range(len(x0)):
+        x.append(x0[i]+xi)
+        y.append(y0[i]+yi)
 
 
 def init():
     glClearColor(0.0, 0.0, 0.0, 1.0)
-    gluOrtho2D(0, 950, 950, 0)
+    gluOrtho2D(0, 2500, 2500, 0)
 
 
 def plotpoints():
@@ -73,17 +60,16 @@ def plotpoints():
 
 
 def main():
-    xc = int(input("Ingresa Xc: "))
-    yc = int(input("Ingresa Yc: "))
-    r = int(input("Ingresa el radio: "))
+    xi = int(input("Ingresa Xi: "))
+    yi = int(input("Ingresa Yi: "))
 
-    circ_dda(xc, yc, r)
+    elipse_pm(xi, yi)
 
     glutInit()
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
     glutInitWindowSize(950, 950)
     glutInitWindowPosition(0, 0)
-    glutCreateWindow("Circunferencia mediante DDA")
+    glutCreateWindow("Parabola mediante Punto Medio")
     glutDisplayFunc(plotpoints)
     init()
     glutMainLoop()
